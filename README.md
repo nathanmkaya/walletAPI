@@ -1,4 +1,6 @@
 ## Simple Wallet API
+[![Go Report Card](https://goreportcard.com/badge/github.com/nathanmkaya/walletAPI)](https://goreportcard.com/report/github.com/nathanmkaya/walletAPI)
+
 Write a simple wallet REST API.
 We expect the following:
 1. account deposits
