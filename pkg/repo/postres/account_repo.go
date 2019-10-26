@@ -35,7 +35,6 @@ func (p *pgAccountRepo) GetByID(id int) (*entity.Account, error) {
 }
 
 func (p *pgAccountRepo) Create(a entity.Account) (int, error) {
-	println("reached")
 	err := p.DB.Insert(&a)
 	if err != nil {
 		return 0, err
@@ -44,7 +43,7 @@ func (p *pgAccountRepo) Create(a entity.Account) (int, error) {
 }
 
 func (p *pgAccountRepo) Update(a *entity.Account) (*entity.Account, error) {
-	err := p.DB.Update(&a)
+	err := p.DB.Update(a)
 	if err != nil {
 		return nil, err
 	}

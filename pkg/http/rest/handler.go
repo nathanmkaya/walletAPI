@@ -49,7 +49,6 @@ func CreateAccount(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *htt
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		fmt.Println(account.Balance)
 		_, err = usecase.CreateAccount(account)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
