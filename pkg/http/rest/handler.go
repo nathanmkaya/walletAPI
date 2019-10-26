@@ -36,7 +36,7 @@ func GetAccount(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *http.R
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(account)
+		_ = json.NewEncoder(w).Encode(account)
 	}
 }
 
@@ -55,7 +55,7 @@ func CreateAccount(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *htt
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode("New Account created.")
+		_ = json.NewEncoder(w).Encode("New Account created.")
 	}
 }
 
@@ -72,7 +72,7 @@ func CheckBalance(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *http
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(fmt.Sprintf("{'balance':%f}", balance))
+		_ = json.NewEncoder(w).Encode(fmt.Sprintf("{'balance':%f}", balance))
 	}
 }
 
@@ -89,7 +89,7 @@ func GetMiniStatement(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(transactions)
+		_ = json.NewEncoder(w).Encode(transactions)
 	}
 }
 
@@ -124,7 +124,7 @@ func Withdraw(usecase uc.TransactionUsecase, accountUsecase uc.AccountUsecase) f
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode("Withdraw Successful")
+		_ = json.NewEncoder(w).Encode("Withdraw Successful")
 	}
 }
 
@@ -154,6 +154,6 @@ func Deposit(usecase uc.TransactionUsecase, accountUsecase uc.AccountUsecase) fu
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode("Deposit Successful")
+		_ = json.NewEncoder(w).Encode("Deposit Successful")
 	}
 }

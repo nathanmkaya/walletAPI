@@ -116,6 +116,10 @@ func (s *AccountRepoTestSuite) TestPgAccountRepo_Delete() {
 	assert.Nil(t, err)
 	assert.Equal(t, result, true)
 
+	result1, err1 := s.repository.Delete(s.account.Id)
+	assert.NotNil(t, err1)
+	assert.Equal(t, result1, false)
+
 	account, err1 := s.repository.GetByID(s.account.Id)
 	assert.Nil(t, account)
 	assert.NotNil(t, err1)
