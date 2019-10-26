@@ -4,6 +4,8 @@ import (
 	"walletAPI/pkg/entity"
 )
 
+//go:generate mockery -all -output $PWD/mocks
+
 type AccountRepository interface {
 	Fetch(num int) ([]*entity.Account, error)
 	GetByID(id int) (*entity.Account, error)

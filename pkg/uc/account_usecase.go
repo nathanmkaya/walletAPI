@@ -38,7 +38,7 @@ func (u *ucAccountUsecase) MiniStatement(Id int) ([]entity.Transaction, error) {
 	if err != nil {
 		return nil, err
 	}
-	return account.Transactions[:20], err
+	return account.Transactions, err
 }
 
 func NewAccountUsecase(accountRepository repo.AccountRepository) *ucAccountUsecase {

@@ -21,7 +21,7 @@ func (u *ucTransactionUsecase) MakeDeposit(a *entity.Account, amount float64) (e
 	a.Balance = a.Balance + amount
 	_, err = u.transactionRepo.Update(a)
 	if err != nil {
-		return
+		return err
 	}
 	return nil
 }

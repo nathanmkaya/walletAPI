@@ -2,6 +2,8 @@ package uc
 
 import "walletAPI/pkg/entity"
 
+//go:generate mockery -all -output $PWD/mocks
+
 type AccountUsecase interface {
 	CheckBalance(Id int) (balance float64, err error)
 	MiniStatement(Id int) (Transactions []entity.Transaction, err error)
