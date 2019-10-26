@@ -1,5 +1,5 @@
 ## Simple Wallet API
-[![Go Report Card](https://goreportcard.com/badge/github.com/nathanmkaya/walletAPI)](https://goreportcard.com/report/github.com/nathanmkaya/walletAPI)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nathanmkaya/walletAPI)](https://goreportcard.com/report/github.com/nathanmkaya/walletAPI) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ebfaf44753654f8d8158aa0571f093fc)](https://www.codacy.com/manual/nathanmkaya/walletAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nathanmkaya/walletAPI&amp;utm_campaign=Badge_Grade)
 
 Write a simple wallet REST API.
 We expect the following:
