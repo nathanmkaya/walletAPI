@@ -13,8 +13,8 @@ jobs:
         with:
           postgresql version: '11'
           postgresql db: postgres
-          postgresql user: root
-          postgresql password: postgres
+          postgresql user: postgres
+          postgresql password: root
 
       - name: Setup Go for use with actions
         uses: actions/setup-go@v1.1.1
