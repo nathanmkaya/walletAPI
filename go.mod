@@ -10,5 +10,5 @@ require (
 	github.com/mattn/goveralls v0.0.3 // indirect
 	github.com/stretchr/objx v0.1.1 // indirect
 	github.com/stretchr/testify v1.4.0
-	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
+	golang.org/x/tools v0.0.0-20191026034945-b2104f82a97d // indirect
 )
