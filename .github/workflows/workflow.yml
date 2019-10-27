@@ -1,0 +1,24 @@
+on: ["push","pull_request"]
+
+name: Test Coveralls
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Setup Go for use with actions
+        uses: actions/setup-go@v1.0.0
+
+      - uses: actions/checkout@master
+
+      - name: npm install, make test-coverage
+        run: go test -v -covermode=count -coverprofile=coverage.out
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.0.1
+        with:
+          github-token: ${{ secrets.github_token }}
+
