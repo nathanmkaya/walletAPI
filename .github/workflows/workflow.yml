@@ -9,6 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '11'
+          postgresql db: 'postgres'
+          postgresql user: 'root'
+          postgresql password: 'postgres'
+
       - name: Setup Go for use with actions
         uses: actions/setup-go@v1.1.1
         with:
