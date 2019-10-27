@@ -14,8 +14,10 @@ jobs:
 
       - uses: actions/checkout@master
 
-      - name: npm install, make test-coverage
-        run: go test -v -covermode=count -coverprofile=coverage.out
+      - name: run test-coverage
+        run: |
+          go build ./...
+          go test ./... -v -covermode=count -coverprofile=coverage.out
 
       - name: Coveralls
         uses: coverallsapp/github-action@v1.0.1
