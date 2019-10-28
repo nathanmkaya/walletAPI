@@ -40,6 +40,11 @@ jobs:
           go get github.com/schrej/godacov
           go test ./... -coverprofile=coverage.out
           $(go env GOPATH)/bin/godacov -t ${{ secrets.CODACY_PROJECT_TOKEN }} -r ./coverage.out -c ${{ github.sha }}
+          
+      - name: Codecov report
+        run: |
+          go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+          bash <(curl -s https://codecov.io/bash)
 
 
 
