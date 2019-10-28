@@ -39,7 +39,7 @@ jobs:
         run: |
           go get github.com/schrej/godacov
           go test ./... -coverprofile=coverage.out
-          godacov -t ${{ secrets.CODACY_PROJECT_TOKEN }} -r ./coverage.out -c ${{ secrets.GITHUB_SHA }}
+          $(go env GOPATH)/bin/godacov -t ${{ secrets.CODACY_PROJECT_TOKEN }} -r ./coverage.out -c ${{ secrets.GITHUB_SHA }}
 
 
 
