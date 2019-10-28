@@ -16,21 +16,30 @@ jobs:
           postgresql user: postgres
           postgresql password: root
 
-      - name: Setup Go for use with actions
+      - name: Set up Go 1.13
         uses: actions/setup-go@v1.1.1
         with:
           go-version: '1.13'
 
-      - uses: actions/checkout@master
+      - name: Check out code
+        uses: actions/checkout@master
 
-      - name: run test-coverage
+      - name: Get dependencies
+          run: |
+            go get -v -t -d ./...
+            go get github.com/schrej/godacov
+
+      - name: Build
+        run: go build ./...
+
+      - name: Test
+        run: go test ./...
+
+      - name: Run test-coverage and send to Codacy
         run: |
-          go build ./...
-          go test ./... -v -covermode=count -coverprofile=coverage.out
+          go test ./... -coverprofile=coverage.out
+          godacov -t ${{ secrets.CODACY_PROJECT_TOKEN }} -r ./coverage.out -c ${{ secrets.GITHUB_SHA }}
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@v1.0.1
-        with:
-          github-token: ${{ secrets.github_token }}
-          path-to-lcov: ./coverage.out
+
+
 
