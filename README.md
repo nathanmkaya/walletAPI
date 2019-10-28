@@ -16,3 +16,22 @@ Added advantage:
 
 Clearly document how to set up and run your application.
 
+To run the app
+```shell script
+go run ./cmd/server
+```
+
+To setup the app
+```shell script
+go get ./...
+```
+
+To run tests
+```shell script
+go test ./...
+```
+
+To run tests with coverage
+```shell script
+go test ./... -cover
+```
