@@ -25,9 +25,9 @@ jobs:
         uses: actions/checkout@master
 
       - name: Get dependencies
-          run: |
-            go get -v -t -d ./...
-            go get github.com/schrej/godacov
+        run: |
+          go get -v -t -d ./...
+          go get github.com/schrej/godacov
 
       - name: Build
         run: go build ./...
