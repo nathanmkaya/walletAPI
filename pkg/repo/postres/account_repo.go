@@ -2,8 +2,8 @@ package postres
 
 import (
 	"github.com/go-pg/pg/v9"
-	"walletAPI/pkg/entity"
-	"walletAPI/pkg/repo"
+	"github/nathanmkaya/walletAPI/pkg/entity"
+	"github/nathanmkaya/walletAPI/pkg/repo"
 )
 
 func NewSQLAccountRepo(db *pg.DB) repo.AccountRepository {

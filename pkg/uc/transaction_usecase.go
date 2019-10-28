@@ -1,9 +1,9 @@
 package uc
 
 import (
+	"github/nathanmkaya/walletAPI/pkg/entity"
+	"github/nathanmkaya/walletAPI/pkg/repo"
 	"time"
-	"walletAPI/pkg/entity"
-	"walletAPI/pkg/repo"
 )
 
 type ucTransactionUsecase struct {

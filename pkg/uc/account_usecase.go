@@ -1,8 +1,8 @@
 package uc
 
 import (
-	"walletAPI/pkg/entity"
-	"walletAPI/pkg/repo"
+	"github/nathanmkaya/walletAPI/pkg/entity"
+	"github/nathanmkaya/walletAPI/pkg/repo"
 )
 
 type ucAccountUsecase struct {
@@ -33,12 +33,16 @@ func (u *ucAccountUsecase) CheckBalance(Id int) (balance float64, err error) {
 	return account.Balance, nil
 }
 
-func (u *ucAccountUsecase) MiniStatement(Id int) ([]entity.Transaction, error) {
+func (u *ucAccountUsecase) MiniStatement(Id int) (entity.Statement, error) {
 	account, err := u.accountRepository.GetByID(Id)
 	if err != nil {
-		return nil, err
+		return entity.Statement{}, err
 	}
-	return account.Transactions, err
+
+	return entity.Statement{
+		Balance:      account.Balance,
+		Transactions: account.Transactions,
+	}, err
 }
 
 func NewAccountUsecase(accountRepository repo.AccountRepository) *ucAccountUsecase {

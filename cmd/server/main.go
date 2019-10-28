@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"github.com/go-pg/pg/v9"
 	"github.com/go-pg/pg/v9/orm"
+	"github/nathanmkaya/walletAPI/pkg/entity"
+	"github/nathanmkaya/walletAPI/pkg/http/rest"
+	"github/nathanmkaya/walletAPI/pkg/repo"
+	"github/nathanmkaya/walletAPI/pkg/repo/postres"
+	"github/nathanmkaya/walletAPI/pkg/uc"
 	"log"
 	"net/http"
-	"walletAPI/pkg/entity"
-	"walletAPI/pkg/http/rest"
-	"walletAPI/pkg/repo"
-	"walletAPI/pkg/repo/postres"
-	"walletAPI/pkg/uc"
 )
 
 func main() {

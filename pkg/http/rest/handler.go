@@ -2,12 +2,15 @@ package rest
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
+	"github/nathanmkaya/walletAPI/pkg/entity"
+	"github/nathanmkaya/walletAPI/pkg/helpers"
+	"github/nathanmkaya/walletAPI/pkg/uc"
+	"log"
 	"net/http"
 	"strconv"
-	"walletAPI/pkg/entity"
-	"walletAPI/pkg/uc"
 )
 
 func Handler(ac uc.AccountUsecase, tx uc.TransactionUsecase) http.Handler {
@@ -42,11 +45,16 @@ func GetAccount(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *http.R
 
 func CreateAccount(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		decode := json.NewDecoder(r.Body)
 		var account entity.Account
-		err := decode.Decode(&account)
+		err := helpers.DecodeJSONBody(w, r, &account)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			var mr *helpers.MalformedRequest
+			if errors.As(err, &mr) {
+				http.Error(w, mr.Msg, mr.Status)
+			} else {
+				log.Println(err.Error())
+				http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			}
 			return
 		}
 		_, err = usecase.CreateAccount(account)
@@ -68,7 +76,7 @@ func CheckBalance(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *http
 		}
 		balance, err1 := usecase.CheckBalance(Id)
 		if err1 != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err1.Error(), http.StatusBadRequest)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
@@ -83,13 +91,13 @@ func GetMiniStatement(usecase uc.AccountUsecase) func(w http.ResponseWriter, r *
 			http.Error(w, fmt.Sprintf("%s is not a valid Account ID, it must be a number.", p.ByName("id")), http.StatusBadRequest)
 			return
 		}
-		transactions, err1 := usecase.MiniStatement(Id)
+		statement, err1 := usecase.MiniStatement(Id)
 		if err1 != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err1.Error(), http.StatusBadRequest)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(transactions)
+		_ = json.NewEncoder(w).Encode(statement)
 	}
 }
 
@@ -104,22 +112,27 @@ func Withdraw(usecase uc.TransactionUsecase, accountUsecase uc.AccountUsecase) f
 			http.Error(w, fmt.Sprintf("%s is not a valid Account ID, it must be a number.", p.ByName("id")), http.StatusBadRequest)
 			return
 		}
-		decode := json.NewDecoder(r.Body)
 		var tx TX
-		err1 := decode.Decode(&tx)
-		if err1 != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+		err = helpers.DecodeJSONBody(w, r, &tx)
+		if err != nil {
+			var mr *helpers.MalformedRequest
+			if errors.As(err, &mr) {
+				http.Error(w, mr.Msg, mr.Status)
+			} else {
+				log.Println(err.Error())
+				http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			}
 			return
 		}
 
 		account, err2 := accountUsecase.GetAccountById(Id)
 		if err2 != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err2.Error(), http.StatusBadRequest)
 			return
 		}
 		err3 := usecase.MakeWithdrawal(account, tx.Amount)
 		if err3 != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err3.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -135,21 +148,26 @@ func Deposit(usecase uc.TransactionUsecase, accountUsecase uc.AccountUsecase) fu
 			http.Error(w, fmt.Sprintf("%s is not a valid Account ID, it must be a number.", p.ByName("id")), http.StatusBadRequest)
 			return
 		}
-		decode := json.NewDecoder(r.Body)
 		var tx TX
-		err1 := decode.Decode(&tx)
-		if err1 != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+		err = helpers.DecodeJSONBody(w, r, &tx)
+		if err != nil {
+			var mr *helpers.MalformedRequest
+			if errors.As(err, &mr) {
+				http.Error(w, mr.Msg, mr.Status)
+			} else {
+				log.Println(err.Error())
+				http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			}
 			return
 		}
 		account, err2 := accountUsecase.GetAccountById(Id)
 		if err2 != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err2.Error(), http.StatusBadRequest)
 			return
 		}
 		err3 := usecase.MakeDeposit(account, tx.Amount)
 		if err3 != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err3.Error(), http.StatusBadRequest)
 			return
 		}
 

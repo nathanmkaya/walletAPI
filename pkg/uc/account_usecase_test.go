@@ -3,9 +3,9 @@ package uc
 import (
 	fuzz "github.com/google/gofuzz"
 	"github.com/stretchr/testify/assert"
+	"github/nathanmkaya/walletAPI/mocks"
+	"github/nathanmkaya/walletAPI/pkg/entity"
 	"testing"
-	"walletAPI/mocks"
-	"walletAPI/pkg/entity"
 )
 
 func TestNewAccountUsecase(t *testing.T) {
@@ -75,9 +75,10 @@ func TestUcAccountUsecase_MiniStatement(t *testing.T) {
 
 	usecase := NewAccountUsecase(mockAccountRepo)
 
-	transactions, err := usecase.MiniStatement(account.Id)
+	statement, err := usecase.MiniStatement(account.Id)
 	assert.Nil(t, err)
-	assert.ElementsMatch(t, account.Transactions, transactions)
+	assert.Equal(t, account.Balance, statement.Balance)
+	assert.ElementsMatch(t, account.Transactions, statement.Transactions)
 
 	mockAccountRepo.AssertExpectations(t)
 }

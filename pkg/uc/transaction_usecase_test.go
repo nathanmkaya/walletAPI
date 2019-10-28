@@ -4,9 +4,9 @@ import (
 	"errors"
 	fuzz "github.com/google/gofuzz"
 	"github.com/stretchr/testify/assert"
+	"github/nathanmkaya/walletAPI/mocks"
+	"github/nathanmkaya/walletAPI/pkg/entity"
 	"testing"
-	"walletAPI/mocks"
-	"walletAPI/pkg/entity"
 )
 
 func TestNewTransactionUsecase(t *testing.T) {

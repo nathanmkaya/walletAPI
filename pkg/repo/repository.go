@@ -1,7 +1,7 @@
 package repo
 
 import (
-	"walletAPI/pkg/entity"
+	"github/nathanmkaya/walletAPI/pkg/entity"
 )
 
 //go:generate mockery -all -output $PWD/mocks

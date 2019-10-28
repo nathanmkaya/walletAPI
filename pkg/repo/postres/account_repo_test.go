@@ -6,9 +6,9 @@ import (
 	"github.com/google/gofuzz"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
+	"github/nathanmkaya/walletAPI/pkg/entity"
+	"github/nathanmkaya/walletAPI/pkg/repo"
 	"testing"
-	"walletAPI/pkg/entity"
-	"walletAPI/pkg/repo"
 )
 
 type AccountRepoTestSuite struct {
