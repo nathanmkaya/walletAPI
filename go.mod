@@ -9,6 +9,7 @@ require (
 	github.com/google/go-cmp v0.3.1 // indirect
 	github.com/google/gofuzz v1.0.0
 	github.com/julienschmidt/httprouter v1.3.0
+	github.com/schrej/godacov v0.0.0-20191017093636-565cfab00b51 // indirect
 	github.com/stretchr/objx v0.1.1 // indirect
 	github.com/stretchr/testify v1.4.0
 	golang.org/x/net v0.0.0-20190620200207-3b0461eec859 // indirect
